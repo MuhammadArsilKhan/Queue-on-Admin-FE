@@ -1,0 +1,87 @@
+<div class="fade show" style="text-align: center; padding-top: calc(100vh / 2); height: 100vh" *ngIf = "loadingFlag">
+  <i class="spinner-grow spinner-grow-sm"></i>
+  <span class="m-1">Loading...</span>
+</div>
+<div *ngIf = "!loadingFlag">
+<h3>CUSTOMER DETAILS</h3>
+<c-card>
+    <c-row style="padding: 15px;">
+        <c-col md="4">
+            <span><label><b>Name: </b></label> {{customer.fullName}}</span>
+        </c-col>
+        <c-col md="4">
+            <span><label><b>Gender: </b></label> {{customer.gender}}</span>
+        </c-col>
+        <c-col md="4">
+            <span><label><b>Date of Birth: </b></label> {{customer.dateOfBirth}}</span>
+        </c-col>
+    </c-row>
+    <c-row style="padding: 15px;">
+      <c-col md="4">
+        <span><label><b>Mobile Number: </b></label> {{customer.completeMobileNumber}}</span>
+      </c-col>
+      <c-col md="4">
+          <span><label><b>Reward Points: </b></label> {{customer.rewardPoints}}</span>
+      </c-col>
+      <c-col md="4">
+          <span><label><b>Registration Date: </b></label> {{customer.createdAt | date: 'dd/MM/yyyy'}}</span>
+      </c-col>
+    </c-row>
+    <c-row style="padding: 15px;">
+      <c-col>
+        <span><label><b>Address: </b></label> {{customer.address}}</span>
+      </c-col>
+    </c-row>
+    <c-row style="padding: 15px;">
+      <c-col>
+        <span><label><b>Activation Status: </b></label> <span *ngIf = "customer.locked">  Locked</span><span *ngIf = "!customer.locked">  Active</span></span>
+      </c-col>
+    </c-row>
+</c-card>
+<br>
+<br>
+<h3>ORDERS</h3>
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-body>
+            <table [striped]="true" cTable>
+              <thead>
+              <tr>
+                <th scope="col">Order #</th>
+                <th scope="col">Merchant Name</th>
+                <th scope="col">Customer Rating</th>
+                <th scope="col">Serving Time</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let order of orders, let i = index" style="cursor: pointer;" (click)="getorderDetails(order.identifier)">
+                <th scope="row">{{order.orderNumber}}</th>
+                <td>{{order.merchantName}}</td>
+                <td>{{order.ratingByCustomer}}</td>
+                <td>{{order.readyAt | date: 'dd/MM/yyyy hh:mm'}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <nav aria-label="Table pagination">
+              <ul class="pagination justify-content-center">
+                <li class="page-item"  *ngIf="currentPage != 0" >
+                  <a class="page-link" style="cursor: pointer;" (click)="getOrders(currentPage-1)">
+                      <span>&#8676;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <span class="page-link">{{ currentPage + 1 }} / {{ totalPages }}</span>
+                </li>
+                <li class="page-item" *ngIf="!(currentPage >= totalPages -1)">
+                  <a class="page-link" style="cursor: pointer;" (click)="getOrders(currentPage+1)" >
+                      <span>&#8677;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</div>

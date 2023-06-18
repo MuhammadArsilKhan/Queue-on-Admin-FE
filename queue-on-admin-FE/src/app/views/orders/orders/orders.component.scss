@@ -1,0 +1,23 @@
+.search-bar-container {
+  position: relative;
+  width: 300px; /* Adjust the width as needed */
+  margin: 10px auto; /* Adjust the margin as needed */
+}
+
+.search-bar-container input {
+  width: 300px;
+  padding: 10px 40px 10px 10px; /* Adjust the padding as needed */
+  font-size: 16px;
+}
+
+.search-bar-container .search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 20px; /* Adjust the size as needed */
+  height: 20px; /* Adjust the size as needed */
+  background-image: url('/assets/img/avatars/search-icon.png'); /* Replace 'path-to-search-icon' with the actual path to your search icon image */
+  background-size: cover;
+  cursor: pointer;
+}

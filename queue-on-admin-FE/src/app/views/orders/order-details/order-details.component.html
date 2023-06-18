@@ -1,0 +1,48 @@
+
+<div class="fade show" style="text-align: center; padding-top: calc(100vh / 2); height: 100vh" *ngIf = "loadingFlag">
+    <i class="spinner-grow spinner-grow-sm"></i>
+    <span class="m-1">Loading...</span>
+  </div>
+  <div *ngIf = "!loadingFlag">
+<h3>ORDER DETAILS</h3>
+<c-card>
+    <c-row style="padding: 15px;">
+        <c-col md="4">
+            <span><label><b>Order #: </b></label> {{order.orderNumber}}</span>
+        </c-col>
+        <c-col md="4">
+            <span><label><b>Customer Name: </b></label> {{order.customerName}}</span>
+        </c-col>
+        <c-col md="4">
+            <span><label><b>Merchant Name: </b></label> {{order.merchantName}}</span>
+        </c-col>
+    </c-row>
+    <c-row style="padding: 15px;">
+      <c-col md="4">
+        <span><label><b>Order Time: </b></label> {{order.createdAt | date: 'dd/MM/yyyy hh:mm'}}</span>
+      </c-col>
+      <c-col md="4">
+          <span><label><b>Ready Time: </b></label> {{order.readyAt | date: 'dd/MM/yyyy hh:mm'}}</span>
+      </c-col>
+      <c-col md="4">
+          <span><label><b>Closed By: </b></label> {{order.closedBy}}</span>
+      </c-col>
+    </c-row>
+    <c-row style="padding: 15px;">
+        <c-col md="4">
+          <span><label><b>Customer Rating: </b></label> {{order.ratingByCustomer}}</span>
+        </c-col>
+        <c-col md="4">
+            <span><label><b>Order Status: </b></label> {{order.status}}</span>
+        </c-col>
+        <c-col md="4">
+            <span></span>
+        </c-col>
+    </c-row>
+    <c-row style="padding: 15px;">
+        <c-col md="4">
+          <span><label><b>Customer Review: </b></label> {{order.reviewByCustomer}}</span>
+        </c-col>
+    </c-row>
+</c-card>
+  </div>

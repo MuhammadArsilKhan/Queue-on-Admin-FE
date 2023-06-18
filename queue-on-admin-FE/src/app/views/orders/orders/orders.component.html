@@ -1,0 +1,59 @@
+<div class="fade show" style="text-align: center; padding-top: calc(100vh / 2); height: 100vh" *ngIf = "loadingFlag">
+  <i class="spinner-grow spinner-grow-sm"></i>
+  <span class="m-1">Loading...</span>
+</div>
+<div *ngIf = "!loadingFlag">
+<h3>ORDERS</h3>
+<form [formGroup]="searchForm">
+  <div class="search-bar-container">
+  
+      <input #searchInput type="text" placeholder="Search" formControlName="searchTerm" (keyup.enter)="onSearch(searchForm.value); searchInput.blur()">
+      <span class="search-icon" (click)="onSearch(searchForm.value)"></span>
+
+</div>
+</form>
+<br>
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-body>
+            <table [striped]="true" cTable>
+              <thead>
+              <tr>
+                <th scope="col">Order No.</th>
+                <th scope="col">Merchant Name</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Created Time</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let order of orders, let i = index" style="cursor: pointer;" (click)="showDetails(order.identifier)">
+                <th scope="row">{{order.orderNumber}}</th>
+                <td>{{order.merchantName}}</td>
+                <td>{{order.customerName}}</td>
+                <td>{{order.createdAt}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <nav aria-label="Table pagination">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item"  *ngIf="currentPage != 0" >
+                    <a class="page-link" style="cursor: pointer;" (click)="getOrdersList(currentPage-1)">
+                        <span>&#8676;</span>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <span class="page-link">{{ currentPage + 1 }} / {{ totalPages }}</span>
+                  </li>
+                  <li class="page-item" *ngIf="!(currentPage >= totalPages -1)">
+                    <a class="page-link" style="cursor: pointer;" (click)="getOrdersList(currentPage+1)">
+                        <span>&#8677;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</div>

@@ -1,0 +1,50 @@
+<div class="fade show" style="text-align: center; padding-top: calc(100vh / 2); height: 100vh" *ngIf = "loadingFlag">
+  <i class="spinner-grow spinner-grow-sm"></i>
+  <span class="m-1">Loading...</span>
+</div>
+<div *ngIf = "!loadingFlag">
+  <h3>CUSTOMERS</h3>
+<c-row ngPreserveWhitespaces>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-body> 
+            <table [striped]="true" cTable>
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Mobile #</th>
+                <th scope="col">Country</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let customer of customers, let i = index" style="cursor: pointer;" (click)="showDetails(customer.identifier)">
+                <th scope="row">{{i+1}}</th>
+                <td>{{customer.fullName}}</td>
+                <td>{{customer.countryCode}}{{customer.mobileNumber}}</td>
+                <td>{{customer.country}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <nav aria-label="Table pagination">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item"  *ngIf="currentPage != 0" >
+                    <a class="page-link" style="cursor: pointer;" (click)="getCustomersList(currentPage-1)">
+                        <span>&#8676;</span>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <span class="page-link">{{ currentPage + 1 }} / {{ totalPages }}</span>
+                  </li>
+                  <li class="page-item" *ngIf="!(currentPage >= totalPages -1)">
+                    <a class="page-link" style="cursor: pointer;" (click)="getCustomersList(currentPage+1)" >
+                        <span>&#8677;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</div>

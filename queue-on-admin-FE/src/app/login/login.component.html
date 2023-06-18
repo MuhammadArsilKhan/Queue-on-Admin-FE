@@ -1,0 +1,62 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+    <c-container>
+      <c-row class="justify-content-center">
+        <c-col md="9">
+          <c-card-group>
+            <c-card [ngStyle]="{'width.%': 55}" class="text-white bg-dark py-5">
+              <c-card-body class="text-center">
+                <div>
+                  <img src="assets/img/avatars/logo.png">
+                </div>
+                <br><br>
+                <h4>A complete integrated solution to manage queues</h4>
+              </c-card-body>
+            </c-card>
+            <c-card class="p-4">
+              <c-card-body>
+                <form [formGroup]="loginForm">
+                  <h1>Login</h1>
+                  <p class="text-medium-emphasis">Sign In to your account</p>
+                  <c-input-group class="mb-3">
+                    <span cInputGroupText>
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input autoComplete="username" formControlName="username" placeholder="Username" required/> 
+                </c-input-group>
+                <c-input-group class="mb-4">
+                    <span cInputGroupText>
+                      <svg cIcon name="cilLockLocked"></svg>
+                    </span>
+                    <input
+                      autoComplete="current-password"
+                      formControlName="password"
+                      placeholder="Password"
+                      type="password"
+                      required
+                    />
+                </c-input-group>
+                  <c-row>
+                    <c-col xs="6">
+                      <button type="submit" cButton class="px-4" color="dark" [disabled]="loginForm.invalid" (click)="onSubmit(loginForm.value)">
+                        Login
+                      </button>
+                    </c-col>
+                  </c-row>
+                  <c-row>
+                    <c-col xs="7">
+                      <span *ngIf = "error">
+                      <p style="color: red;">
+                        Invalid username or password.
+                      </p>
+                    </span>
+                    </c-col>
+                  </c-row>
+                </form>
+              </c-card-body>
+            </c-card>
+          </c-card-group>
+        </c-col>
+      </c-row>
+    </c-container>
+  </div>
+  
